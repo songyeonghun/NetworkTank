@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+
     [Header("DisconnectPanel")]
     public InputField NickNameInput;
 
@@ -33,7 +34,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
-
 
     #region 방리스트 갱신
     // ◀버튼 -2 , ▶버튼 -1 , 셀 숫자
@@ -82,8 +82,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 
     #region 서버연결
-    void Awake() => Screen.SetResolution(960, 540, false);
-
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        Screen.SetResolution(960, 540, false);
+    }
     void Update()
     {
         StatusText.text = PhotonNetwork.NetworkClientState.ToString();
@@ -179,4 +182,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
     #endregion
+
+    
+
 }

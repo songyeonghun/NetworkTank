@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+
 using UnityEngine.SceneManagement;
 
 public class StartBtn : MonoBehaviour
 {
    public void StageStart()
     {
-        SceneManager.LoadScene(1);
+        PhotonNetwork.LoadLevel("Town");
     }
 }

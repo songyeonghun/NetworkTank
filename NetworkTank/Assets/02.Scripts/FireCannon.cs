@@ -10,6 +10,8 @@ public class FireCannon : MonoBehaviourPunCallbacks
     public GameObject cannon;
     public AudioClip fireSfx;
 
+    public bool FireDelay=true;
+
     private AudioSource _audio;
 
     void Start()
@@ -31,8 +33,20 @@ public class FireCannon : MonoBehaviourPunCallbacks
     [PunRPC]  //RPC 이벤트 발생시 정보를 보내는
     void Fire(int number)
     {
-        _audio.PlayOneShot(fireSfx, 0.8f);
-        GameObject obj = Instantiate(cannon, firePos.position, firePos.rotation);
-        obj.GetComponent<Cannon>().actorNumber = number;
+        if (FireDelay == true)
+        {
+            _audio.PlayOneShot(fireSfx, 0.8f);
+            GameObject obj = Instantiate(cannon, firePos.position, firePos.rotation);
+            obj.GetComponent<Cannon>().actorNumber = number;
+            FireDelay = false;
+            StartCoroutine(Delay());
+        }
     }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(3.0f);
+        FireDelay = true;
+    }
+
 }

@@ -18,7 +18,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks {
 
     private string gameVersion = "1.0";
     public string userId = "YouRang";
-    public byte maxPlayer = 20;
+    public byte maxPlayer = 4;
 
     public TMP_InputField txtUserId;
     public TMP_InputField txtRoomName;

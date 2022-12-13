@@ -47,6 +47,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     void ReceiveMsg(string msg)
     {
         msgList.text += "\n" + msg;
+        ifSendMsg.text = "";
     }
 
     public void OnExitClick()

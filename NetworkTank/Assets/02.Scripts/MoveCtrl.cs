@@ -18,12 +18,14 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     public float rotSpeed = 60.0f;
     public TextMeshPro nickName;
     public Image hpBar;
+    public GameObject loseUI;
 
     private float currHp = 100.0f;
     private float initHp = 100.0f;
 
     private bool isDie = false;
     public float respawnTime = 3.0f;
+    public int dieCount = 0;
 
     void Start()
     {
@@ -68,6 +70,10 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 tr.rotation = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 10.0f);
             }
         }
+        if (dieCount == 5)
+        {
+            loseUI.SetActive(true);
+        }
     }
 
     // 포탄에 맞았을 경우
@@ -84,6 +90,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             if (photonView.IsMine && currHp <= 0.0f)
             {
                 isDie = true;
+                dieCount++;
                 Debug.Log("Killed by " + hitter);
                 StartCoroutine(RespawnPlayer(actorNumber));
             }
